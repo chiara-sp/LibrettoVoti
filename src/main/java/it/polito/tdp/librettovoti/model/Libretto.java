@@ -41,6 +41,20 @@ public class Libretto {
 		}
 		return risultato;
 	}
+	/**
+	 * Ricercz un voto del corso di cui è specificato il nome 
+	 * se il corso non esiste, resistuisce null
+	 * @param nomeCorso
+	 * @return
+	 */
+	public Voto ricercaCorso(String nomeCorso) {
+		Voto risultato= null;
+		for(Voto v: this.voti) {
+			if(v.getNome().equals(nomeCorso))
+				risultato=v;
+		}
+		return risultato;
+	}
 	
 	public String toString() {
 		String s="";
