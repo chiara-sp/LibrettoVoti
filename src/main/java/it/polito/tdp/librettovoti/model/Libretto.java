@@ -5,12 +5,15 @@ import java.util.*;
 public class Libretto {
 	
 	private List<Voto> voti;
+	private Map<String,Voto> votiMap; //identity map
 	
 	public Libretto(){
 		this.voti= new ArrayList<Voto>();
+		this.votiMap= new HashMap<String,Voto>();
 	}
 	public void add( Voto voto) {
 		voti.add(voto);
+		votiMap.put(voto.getNome(), voto);
 	
 	}
 	/*
@@ -54,6 +57,35 @@ public class Libretto {
 				risultato=v;
 		}
 		return risultato;
+	}
+	 
+	/**
+	 * verifica se nel libretto c'è già un voto con lo stesso esame e la stessa votazione 
+	 * @param v
+	 * @return
+	 */
+	public boolean esisteDuplicato(Voto v) {
+		boolean trovato= false;
+		for(Voto voto: this.voti) {
+			if(voto.getNome().equals(v.getNome())&& voto.getVoto()==v.getVoto())
+				trovato=true;
+			break;
+		}
+		return trovato;
+	}
+	/**
+	 * verifica se nel libretto c'è già uj voto della stesso esame con votazione diversa
+	 * @param v
+	 * @return
+	 */
+	public boolean esisteConflitto(Voto v) {
+		boolean trovato= false;
+		for(Voto voto: this.voti) {
+			if(voto.getNome().equals(v.getNome())&& voto.getVoto()!=v.getVoto())
+				trovato=true;
+			break;
+		}
+		return trovato;
 	}
 	
 	public String toString() {
