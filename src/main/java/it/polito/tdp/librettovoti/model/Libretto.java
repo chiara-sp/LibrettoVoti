@@ -36,7 +36,7 @@ public class Libretto {
 		return risultato;
 	}
 	
-	public Libretto votiUguali3(int punteggio) {
+	public Libretto votiUguali(int punteggio) {
 		Libretto risultato = new Libretto();
 		for(Voto v: this.voti) {
 			if(v.getVoto()==punteggio)
@@ -51,12 +51,14 @@ public class Libretto {
 	 * @return
 	 */
 	public Voto ricercaCorso(String nomeCorso) {
-		Voto risultato= null;
+	/*	Voto risultato= null;
 		for(Voto v: this.voti) {
 			if(v.getNome().equals(nomeCorso))
 				risultato=v;
+			break;
 		}
-		return risultato;
+		return risultato*/
+		return this.votiMap.get(nomeCorso);
 	}
 	 
 	/**
@@ -65,13 +67,21 @@ public class Libretto {
 	 * @return
 	 */
 	public boolean esisteDuplicato(Voto v) {
-		boolean trovato= false;
+		/*boolean trovato= false;
 		for(Voto voto: this.voti) {
 			if(voto.getNome().equals(v.getNome())&& voto.getVoto()==v.getVoto())
 				trovato=true;
 			break;
 		}
-		return trovato;
+		return trovato;*/
+		
+		Voto trovato = this.votiMap.get(v.getNome()) ;
+		if(trovato==null)
+			return false ;
+		if(trovato.getVoto()==v.getVoto()) 
+			return true;
+		else
+			return false ;
 	}
 	/**
 	 * verifica se nel libretto c'è già uj voto della stesso esame con votazione diversa
@@ -79,13 +89,20 @@ public class Libretto {
 	 * @return
 	 */
 	public boolean esisteConflitto(Voto v) {
-		boolean trovato= false;
+	/*	boolean trovato= false;
 		for(Voto voto: this.voti) {
 			if(voto.getNome().equals(v.getNome())&& voto.getVoto()!=v.getVoto())
 				trovato=true;
 			break;
 		}
-		return trovato;
+		return trovato;*/
+		Voto trovato = this.votiMap.get(v.getNome()) ;
+		if(trovato==null)
+			return false ;
+		if(trovato.getVoto()!=v.getVoto()) 
+			return true;
+		else
+			return false ;
 	}
 	
 	public String toString() {
